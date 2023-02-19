@@ -1,0 +1,10 @@
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+      <!-- 하드코딩 된 url보다는 변경되어도 지장이 가지 않게 name을 설정해줘서 바꿔주자-->
+            <li><a href={% url 'polls:detail' question.id %}>{{ question.question_text}}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
