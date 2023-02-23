@@ -1,0 +1,10 @@
+/* 스타일 시트와 같이 Django가 생성하지 않은 정적파일에서는 {% static %} 템플릿 태그를 사용할 수 없다. 항상 상대경로를 사용해야한다. */
+li a{
+  color: green;
+}
+
+body{
+  background: white
+  url("images/background.PNG") no-repeat;
+  background-position: center;
+}

@@ -1,3 +1,8 @@
+{% load static %}
+<!-- 위 코드는 정적파일의 절대 URL을 나타낸 것이다. --> 
+
+<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+
 {% if latest_question_list %}
     <ul>
         {% for question in latest_question_list %}
