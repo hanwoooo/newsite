@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Question, Choice
 
-# 2.23 다시 오게 되면 여기 부분 에러코드 분석하고 고칠것!
+# 2.23 다시 오게 되면 여기 부분 에러코드 분석하고 고칠것! --> 2.24 해결!!
 # 수십개의 필드가 있을 경우 폼을 fieldset으로 분할하는 것이 좋다. 
 
 # Register your models here.
@@ -35,11 +35,13 @@ class ChoiceInline(admin.TabularInline):
     extra = 3
   
 class QuestionAdmin(admin.ModelAdmin):
-  # fieldsets = [
-  #   (None, {'fields':['question_text']}),
-  #   ('Date information', {'fields': ['pub_date']}),
-  # ]
-  # inlines = [ChoiceInline]
   list_display = ('question_text', 'pub_date', 'was_published_recently')
-list_filter = ['pub_date']
+  fieldsets = [
+    (None, {'fields':['question_text']}),
+    ('Date information', {'fields': ['pub_date']}),
+  ]
+  inlines = [ChoiceInline]
+  search_fields = ['question_text']
+  
+  list_filter = ['pub_date']
 admin.site.register(Question, QuestionAdmin)

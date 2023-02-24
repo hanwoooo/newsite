@@ -27,15 +27,24 @@ import datetime
 
 #2 decorator 사용한 Question class
 class Question(models.Model):
-    @admin.display(
+  question_text = models.CharField(max_length=200)
+  pub_date = models.DateTimeField('data published')
+
+  # 밑의 __str__ 함수를 통해 shell에서 원하는 문구를 볼 수 있다. 
+  def __str__(self):
+    return self.question_text
+
+  @admin.display(
       boolean=True,
       ordering='pub_date',
       description='Published recently?',
     )
-    def was_published_recently(self):
-      now = timezone.now()
-      return now - datetime.timedelta(days=1) <= self.pub_date <= now
-
+  
+  def was_published_recently(self):
+    now = timezone.now()
+    return now - datetime.timedelta(days=1) <= self.pub_date <= now
+      
+  
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
